@@ -6,7 +6,7 @@
 /*   By: cterrasi <cterrasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 23:15:39 by cterrasi          #+#    #+#             */
-/*   Updated: 2022/04/22 13:15:43 by cterrasi         ###   ########.fr       */
+/*   Updated: 2022/04/22 20:25:44 by cterrasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_eval_format(const char format, va_list args)
 	else if (format == 'x' || format == 'X')
 		len += ft_print_hex(va_arg(args, unsigned int), format);
 	else if (format == 'p')
-		len += ft_print_p((unsigned long int)(va_arg(args, void *)));
+		len += ft_print_p(va_arg(args, size_t));
 	return (len);
 }
 
@@ -43,14 +43,10 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format != '%')
 			len += ft_print_c(*format);
+		else if (*++format == '%')
+			len += ft_print_c(*format);
 		else
-		{
-			if (*(format + 1) == '%')
-				len += ft_print_c(*(format + 1));
-			else
-				len += ft_eval_format(*(format + 1), args);
-			format++;
-		}
+			len += ft_eval_format(*format, args);
 		format++;
 	}
 	va_end(args);
