@@ -6,7 +6,7 @@
 #    By: cterrasi <cterrasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/20 15:08:21 by cterrasi          #+#    #+#              #
-#    Updated: 2022/04/22 17:24:51 by cterrasi         ###   ########.fr        #
+#    Updated: 2022/04/22 19:10:11 by cterrasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,12 +49,12 @@ $(NAME):	$(OBJS)
 			$(ECHO) "$(BOLD_YELLOW)$(NAME) successfully compiled!"
 
 clean:		
-			@cd $(LIBFT_DIR); make clean
+			@make clean -C $(LIBFT_DIR)
 			$(RMRF) $(OBJS)
 			$(ECHO) "$(RED)ft_printf *.o files successfully deleted!"
 
 fclean:		clean
-			@cd $(LIBFT_DIR); make fclean
+			@make fclean -C $(LIBFT_DIR)
 			$(RMRF) $(NAME)
 			$(ECHO) "$(RED)$(NAME) successfully deleted!"
 
