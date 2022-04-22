@@ -6,7 +6,7 @@
 #    By: cterrasi <cterrasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/20 15:08:21 by cterrasi          #+#    #+#              #
-#    Updated: 2022/04/22 19:10:11 by cterrasi         ###   ########.fr        #
+#    Updated: 2022/04/22 19:41:12 by cterrasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC_FILES	=	ft_printf.c ft_print_c.c ft_print_s.c \
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJS		=	$(SRCS:.c=.o)
 CC			=	@gcc
-CFLAGS		=	-Wall -Werror -Wextra -I
+CFLAGS		=	-Wall -Werror -Wextra -I.
 INC_DIR		=	inc
 RMRF		=	@rm -rf
 PACK		=	@ar crs
@@ -38,14 +38,10 @@ PURPLE = \033[0;35m
 # RULES
 all:		$(NAME)
 
-%.o : 		%.c
-			$(CC) -c $(CFLAGS) $(INC_DIR) $< -o $@
-			$(ECHO) "$(PURPLE)$< successfully compiled!"
-
 $(NAME):	$(OBJS)
 			@make -C $(LIBFT_DIR)
+			@mv $(LIBFT_NAME) $(NAME) || :
 			$(PACK) $(NAME) $(OBJS)
-			@mv $(LIBFT_NAME) $(NAME)
 			$(ECHO) "$(BOLD_YELLOW)$(NAME) successfully compiled!"
 
 clean:		
