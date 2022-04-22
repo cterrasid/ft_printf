@@ -1,9 +1,23 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: cterrasi <cterrasi@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/04/20 15:08:21 by cterrasi          #+#    #+#              #
+#    Updated: 2022/04/22 17:24:51 by cterrasi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # VARIABLES
 
 ## COMPILATION VARIABLES
-SRC_DIR		=	src
-SRCS		=	$(SRC_DIR)/ft_printf.c $(SRC_DIR)/ft_printchar.c $(SRC_DIR)/ft_printstr.c \
-				$(SRC_DIR)/ft_printhex.c $(SRC_DIR)/ft_printnum.c $(SRC_DIR)/ft_printunum.c
+SRC_DIR		=	src/
+SRC_FILES	=	ft_printf.c ft_print_c.c ft_print_s.c \
+				ft_print_hex.c ft_print_num.c ft_print_u.c \
+				ft_print_p.c
+SRCS		=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJS		=	$(SRCS:.c=.o)
 CC			=	@gcc
 CFLAGS		=	-Wall -Werror -Wextra -I
@@ -12,38 +26,35 @@ RMRF		=	@rm -rf
 PACK		=	@ar crs
 ECHO		=	@echo
 NAME		=	libftprintf.a
-LIBFT_DIR	=	libft
-LIBFT		=	$(LIBFT_DIR)/libft.a
+LIBFT_DIR	=	libft/
+LIBFT_LIB	=	libft.a
+LIBFT_NAME	=	$(addprefix $(LIBFT_DIR), $(LIBFT_LIB))
 
 ## COLOR VARIABLES
 RED = \033[1;91m
-YELLOW = \033[0;93m
-BYELLOW = \033[1;93m
-BPURPLE = \033[1;35m
+BOLD_YELLOW = \033[1;93m
 PURPLE = \033[0;35m
 
 # RULES
 all:		$(NAME)
 
 %.o : 		%.c
-			@make -C $(LIBFT_DIR)
-			@mv $(LIBFT) $(NAME)
 			$(CC) -c $(CFLAGS) $(INC_DIR) $< -o $@
-			$(ECHO) "$(PURPLE)Compiling $<..."
-			$(ECHO) "$(BPURPLE)$< successfully compiled!"
+			$(ECHO) "$(PURPLE)$< successfully compiled!"
 
 $(NAME):	$(OBJS)
+			@make -C $(LIBFT_DIR)
 			$(PACK) $(NAME) $(OBJS)
-			$(ECHO) "$(YELLOW)Compiling $(NAME)..."
-			$(ECHO) "$(BYELLOW)$(NAME) successfully compiled!"
+			@mv $(LIBFT_NAME) $(NAME)
+			$(ECHO) "$(BOLD_YELLOW)$(NAME) successfully compiled!"
 
 clean:		
-			@cd ./libft; make clean
+			@cd $(LIBFT_DIR); make clean
 			$(RMRF) $(OBJS)
 			$(ECHO) "$(RED)ft_printf *.o files successfully deleted!"
 
 fclean:		clean
-			@cd ./libft; make fclean
+			@cd $(LIBFT_DIR); make fclean
 			$(RMRF) $(NAME)
 			$(ECHO) "$(RED)$(NAME) successfully deleted!"
 

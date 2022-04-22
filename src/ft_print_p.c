@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printstr.c                                      :+:      :+:    :+:   */
+/*   ft_print_p.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cterrasi <cterrasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 14:24:18 by cterrasi          #+#    #+#             */
-/*   Updated: 2022/04/20 14:48:07 by cterrasi         ###   ########.fr       */
+/*   Created: 2022/04/21 13:44:50 by cterrasi          #+#    #+#             */
+/*   Updated: 2022/04/22 12:20:33 by cterrasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-size_t	ft_printstr(char *s)
+int	ft_print_p(unsigned long int n)
 {
-	char	*s1;
+	int	len;
 
-	s1 = s;
-	if (s == NULL)
-	{
-		ft_printstr("(null)");
-		return (6);
-	}
-	while (*s)
-		ft_printchar(*s++);
-	return (s - s1);
+	len = 0;
+	len += ft_print_s("0x");
+	len += ft_print_hex(n, 'p');
+	return (len);
 }

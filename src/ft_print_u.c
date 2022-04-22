@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printunum.c                                     :+:      :+:    :+:   */
+/*   ft_print_u.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cterrasi <cterrasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 14:29:47 by cterrasi          #+#    #+#             */
-/*   Updated: 2022/04/20 14:48:13 by cterrasi         ###   ########.fr       */
+/*   Created: 2022/04/21 13:43:44 by cterrasi          #+#    #+#             */
+/*   Updated: 2022/04/22 11:40:44 by cterrasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-static size_t	ft_nbrlen(int n)
+static int	ft_nbrlen(unsigned int n)
 {
-	size_t	len;
+	int	len;
 
 	len = 0;
 	if (n == 0)
@@ -29,33 +29,33 @@ static size_t	ft_nbrlen(int n)
 
 static char	*ft_uitoa(int n)
 {
-	size_t			unlen;
+	int				unlen;
 	char			*unstr;
-	unsigned int	unbr;
+	unsigned int	unum;
 
 	unlen = ft_nbrlen(n);
-	unbr = n;
+	unum = n;
 	unstr = (char *)malloc(sizeof(char) * (unlen + 1));
 	if (!unstr)
 		return (NULL);
 	*(unstr + unlen--) = '\0';
-	if (unbr == 0)
+	if (unum == 0)
 		*(unstr + unlen) = '0';
-	while (unbr > 0)
+	while (unum != 0)
 	{
-		*(unstr + unlen--) = '0' + (unbr % 10);
-		unbr /= 10;
+		*(unstr + unlen--) = '0' + (unum % 10);
+		unum /= 10;
 	}
 	return (unstr);
 }
 
-size_t	ft_printunum(int n)
+int	ft_print_u(int n)
 {
-	size_t	len;
-	char	*unstr;
+	int				len;
+	char			*unstr;
 
 	unstr = ft_uitoa(n);
-	len = ft_printstr(unstr);
+	len = ft_print_s(unstr);
 	free(unstr);
 	return (len);
 }

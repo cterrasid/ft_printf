@@ -6,7 +6,7 @@
 #    By: cterrasi <cterrasi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 19:45:55 by cterrasi          #+#    #+#              #
-#    Updated: 2022/04/17 07:35:38 by cterrasi         ###   ########.fr        #
+#    Updated: 2022/04/22 17:24:16 by cterrasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,25 +36,21 @@ NAME		=	libft.a
 
 ## COLOR VARIABLES
 RED = \033[1;91m
-YELLOW = \033[0;93m
-BYELLOW = \033[1;93m
-BPURPLE = \033[1;35m
-PURPLE = \033[0;35m
+BOLD_YELLOW = \033[1;93m
+BLUE = \033[0;34m
 
 # RULES
 all:		$(NAME)
 
 %.o :		%.c
 			$(CC) -c $(CFLAGS) $(INC_DIR) $< -o $@
-			$(ECHO) "$(PURPLE)Compiling $<..."
-			$(ECHO) "$(BPURPLE)$< successfully compiled!"
+			$(ECHO) "$(BLUE)$< successfully compiled!"
 
 bonus:		$(B)
 
 $(NAME):	$(OBJS)
 			$(PACK) $(NAME) $(OBJS)
-			$(ECHO) "$(YELLOW)Compiling $(NAME)..."
-			$(ECHO) "$(BYELLOW)$(NAME) successfully compiled!"
+			$(ECHO) "$(BOLD_YELLOW)$(NAME) successfully compiled!"
 
 $(B):		$(OBJS) $(BONUS_OBJS)
 			$(PACK) $(NAME) $(OBJS) $(BONUS_OBJS)

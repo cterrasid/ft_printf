@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printnum.c                                      :+:      :+:    :+:   */
+/*   ft_print_s.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cterrasi <cterrasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 14:25:33 by cterrasi          #+#    #+#             */
-/*   Updated: 2022/04/20 14:48:01 by cterrasi         ###   ########.fr       */
+/*   Created: 2022/04/20 14:24:18 by cterrasi          #+#    #+#             */
+/*   Updated: 2022/04/22 11:40:08 by cterrasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-size_t	ft_printnum(int n)
+int	ft_print_s(char *s)
 {
-	size_t	len;
-	char	*nstr;
+	char	*s1;
 
-	nstr = ft_itoa(n);
-	len = ft_printstr(nstr);
-	free(nstr);
-	return (len);
+	s1 = s;
+	if (s == NULL)
+	{
+		ft_print_s("(null)");
+		return (6);
+	}
+	while (*s)
+		ft_print_c(*s++);
+	return (s - s1);
 }
